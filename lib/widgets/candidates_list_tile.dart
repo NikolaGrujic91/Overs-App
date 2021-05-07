@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:overs_app/overs_detector/overs_detector.dart';
+import 'package:overs_app/overs_detector/candidate.dart';
 
 class CandidatesListTile extends StatelessWidget {
-  final OversDetector oversDetector;
-  final int index;
+  final bool candidateFound;
+  final Candidate candidate;
   final int fractionDigits = 2;
 
-  CandidatesListTile({@required this.oversDetector, @required this.index});
+  CandidatesListTile({@required this.candidateFound, @required this.candidate});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
         leading: Text(
-          oversDetector.fixtures[index].league,
+          candidateFound ? candidate.candidateFixture.league : '',
           style: TextStyle(
             fontSize: 25.0,
             fontWeight: FontWeight.bold,
           ),
         ),
         title: Text(
-            //oversDetector.candidates.length == 0 ? 'Nothing found' : oversDetector.candidates[index].toShortString(),
-            oversDetector.fixtures[index].teamsString()),
-        subtitle: Text(
-          oversDetector.fixtures[index].timeString(),
+          candidateFound ? candidate.candidateFixture.teamsString() : 'Nothing found',
         ),
-        trailing: Text(oversDetector.fixtures[index].overOdd.toStringAsFixed(fractionDigits)),
+        subtitle: Text(
+          candidateFound ? candidate.candidateFixture.timeString() : '',
+        ),
+        trailing: Text(
+          candidateFound ? candidate.candidateFixture.overOdd.toStringAsFixed(fractionDigits) : '',
+        ),
       ),
     );
   }

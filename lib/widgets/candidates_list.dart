@@ -17,12 +17,11 @@ class CandidatesList extends StatelessWidget {
             child: ListView.builder(
               controller: _scrollController,
               padding: EdgeInsets.all(10.0),
-              //itemCount: oversDetector.candidates.length == 0 ? 1 : oversDetector.candidates.length,
-              itemCount: oversDetector.fixtures.length,
+              itemCount: oversDetector.candidates.length == 0 ? 1 : oversDetector.candidates.length,
               itemBuilder: (context, index) {
                 return CandidatesListTile(
-                  oversDetector: oversDetector,
-                  index: index,
+                  candidateFound: oversDetector.candidates.length > 0,
+                  candidate: oversDetector.candidates.length > 0 ? oversDetector.candidates[index] : null,
                 );
               },
             ),
