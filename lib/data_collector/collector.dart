@@ -91,12 +91,13 @@ class Collector {
       List<String> values = lines[i].split(',');
 
       DateTime date = _createDate(values[dateIndex]);
+      double overOdd = values[overOddIndex] == '' ? 0.0 : double.parse(values[overOddIndex]);
 
       var fixture = Fixture(homeTeam: values[homeTeamIndex],
                             awayTeam: values[awayTeamIndex],
                             date: date,
                             league: values[leagueIndex],
-                            overOdd: double.parse(values[overOddIndex]),
+                            overOdd: overOdd,
                             finished: false);
 
       _fixtures.add(fixture);

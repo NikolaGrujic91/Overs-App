@@ -156,7 +156,7 @@ class OversDetector extends ChangeNotifier {
       List<Fixture> results = _results[league];
 
       int recentCount = 3;
-      int count = _results.length;
+      int count = results.length;
 
       for (int i = count - 1; i >= 0; i--) {
         if (results[i].homeTeam == teamName) {
