@@ -13,7 +13,7 @@ class CandidatesListTile extends StatelessWidget {
     return Card(
       child: ListTile(
         leading:
-          candidateFound ? FlutterLogo() : '',
+          candidateFound ? FlutterLogo() : Text(''),
         title: Text(
           candidateFound ? candidate.candidateFixture.teamsString() : 'Nothing found',
         ),
