@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'fixture.dart';
 import 'links.dart';
 import 'constants.dart';
+import 'enums.dart';
 
 class Collector {
   //#region Fields
@@ -18,7 +19,7 @@ class Collector {
 
   Collector() {
     _fixtures = <Fixture>[];
-    _results = LinkedHashMap<String, List<Fixture>>();
+    _results = LinkedHashMap<League, List<Fixture>>();
   }
 
   //#endregion
@@ -27,7 +28,7 @@ class Collector {
 
   List<Fixture> get fixtures => _fixtures;
 
-  LinkedHashMap<String, List<Fixture>> get results => _results;
+  LinkedHashMap<League, List<Fixture>> get results => _results;
 
   //#endregion
 
@@ -124,7 +125,6 @@ class Collector {
       List<String> values = lines[i].split(',');
 
       DateTime date = _createDate(values[dateIndex]);
-      String league = values[leagueIndex];
 
       double overOdd = values[overOddIndex] == '' ? 0.0 : double.parse(values[overOddIndex]);
 
@@ -137,12 +137,12 @@ class Collector {
                             overOdd: overOdd,
                             finished: true);
 
-      if (_results.containsKey(league)) {
-        List<Fixture> fixtures = _results[league];
+      if (_results.containsKey(fixture.league)) {
+        List<Fixture> fixtures = _results[fixture.league];
         fixtures.add(fixture);
-        _results[league] = fixtures;
+        _results[fixture.league] = fixtures;
       } else {
-        _results[league] = [fixture];
+        _results[fixture.league] = [fixture];
       }
     }
   }

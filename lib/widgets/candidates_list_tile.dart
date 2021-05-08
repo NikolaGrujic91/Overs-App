@@ -12,18 +12,13 @@ class CandidatesListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        leading: Text(
-          candidateFound ? candidate.candidateFixture.league : '',
-          style: TextStyle(
-            fontSize: 25.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        leading:
+          candidateFound ? FlutterLogo() : '',
         title: Text(
           candidateFound ? candidate.candidateFixture.teamsString() : 'Nothing found',
         ),
         subtitle: Text(
-          candidateFound ? candidate.candidateFixture.timeString() : '',
+          candidateFound ? '${candidate.candidateFixture.leagueName}, ${candidate.candidateFixture.timeString()}' : '',
         ),
         trailing: Text(
           candidateFound ? candidate.candidateFixture.overOdd.toStringAsFixed(fractionDigits) : '',

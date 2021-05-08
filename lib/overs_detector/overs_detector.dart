@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'package:flutter/foundation.dart';
+import 'package:overs_app/data_collector/enums.dart';
 import 'package:overs_app/data_collector/fixture.dart';
 import 'package:overs_app/data_collector/collector.dart';
 import 'candidate.dart';
@@ -9,7 +10,7 @@ class OversDetector extends ChangeNotifier {
 
   List<Candidate> _candidates;
   List<Fixture> _fixtures;
-  LinkedHashMap<String, List<Fixture>> _results;
+  LinkedHashMap<League, List<Fixture>> _results;
 
   //#endregion
 
@@ -18,7 +19,7 @@ class OversDetector extends ChangeNotifier {
   OversDetector() {
     _candidates = <Candidate>[];
     _fixtures = <Fixture>[];
-    _results = LinkedHashMap<String, List<Fixture>>();
+    _results = LinkedHashMap<League, List<Fixture>>();
   }
 
   //#endregion
@@ -149,7 +150,7 @@ class OversDetector extends ChangeNotifier {
     return overFixtures;
   }
 
-  List<Fixture> _getHomeTeamResults(String teamName, String league) {
+  List<Fixture> _getHomeTeamResults(String teamName, League league) {
     var recentResults = <Fixture>[];
 
     if (_results.containsKey(league)) {
@@ -173,7 +174,7 @@ class OversDetector extends ChangeNotifier {
     return recentResults;
   }
 
-  List<Fixture> _getAwayTeamResults(String teamName, String league) {
+  List<Fixture> _getAwayTeamResults(String teamName, League league) {
     var recentResults = <Fixture>[];
 
     if (_results.containsKey(league)) {
