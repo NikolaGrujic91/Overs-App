@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:overs_app/overs_detector/candidate.dart';
+import 'package:overs_app/utils/utils.dart';
 
 class CandidatesListTile extends StatelessWidget {
   final bool candidateFound;
@@ -13,7 +14,7 @@ class CandidatesListTile extends StatelessWidget {
     return Card(
       child: ListTile(
         leading:
-          candidateFound ? FlutterLogo() : Text(''),
+          candidateFound ? Image.asset('icons/flags/png/${leagueToFlagName(candidate.candidateFixture.league)}', package: 'country_icons') : Text(''),
         title: Text(
           candidateFound ? candidate.candidateFixture.teamsString() : 'Nothing found',
         ),
