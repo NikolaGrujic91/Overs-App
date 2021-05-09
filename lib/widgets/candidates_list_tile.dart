@@ -14,7 +14,7 @@ class CandidatesListTile extends StatelessWidget {
     return Card(
       child: ListTile(
         leading:
-          candidateFound ? Image.asset('icons/flags/png/${leagueToFlagName(candidate.candidateFixture.league)}', package: 'country_icons') : Text(''),
+          candidateFound ? Image.asset('icons/flags/png/${leagueToFlagName(candidate.candidateFixture.league)}', package: 'country_icons', height: 40.0, width: 40.0) : Text(''),
         title: Text(
           candidateFound ? candidate.candidateFixture.teamsString() : 'Nothing found',
         ),
