@@ -11,9 +11,12 @@ class Fixture {
   int _awayScore;
   DateTime _date;
   double _overOdd;
+  String _overOddString;
   bool _finished;
   League _league;
   String _leagueName;
+
+  final int _fractionDigits = 2;
 
   //#endregion
 
@@ -28,6 +31,7 @@ class Fixture {
     _league = stringToLeagueEnum(league);
     _leagueName = leagueToLeagueName(_league);
     _overOdd = overOdd;
+    _overOddString = overOdd.toStringAsFixed(_fractionDigits);
     _finished = finished;
   }
 
@@ -41,6 +45,7 @@ class Fixture {
   int get awayScore => _awayScore;
   DateTime get date => _date;
   double get overOdd => _overOdd;
+  String get overOddString => _overOddString;
   bool get finished => _finished;
   League get league => _league;
   String get leagueName => _leagueName;

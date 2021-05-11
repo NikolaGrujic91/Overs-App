@@ -14,6 +14,7 @@ class OversApp extends StatelessWidget {
     return ChangeNotifierProvider<OversDetector>(
       create: (context) => OversDetector(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: MainScreen(),
       ),
     );
