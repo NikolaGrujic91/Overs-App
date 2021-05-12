@@ -20,7 +20,7 @@ class Exporter {
       stringBuffer.writeln();
       stringBuffer.writeln('#bettingtips #bettingpicks #betting #sport #football #bettingtwitter #FreePicks #sportpicks #bestbets');
       stringBuffer.writeln('#bettingodds #odds #soccertips #soccerpicks #soccerbetting #tipster #footballbets');
-      stringBuffer.writeln('${leagueToHashtag(candidate.candidateFixture.league)}');
+      stringBuffer.writeln('${leagueToHashtag(candidate.candidateFixture.league)} ${candidateToHashtag(candidate)}');
       stringBuffer.writeln('-----------------------------------------------------------------------------------------------');
       stringBuffer.writeln();
     }
