@@ -52,17 +52,17 @@ String candidateToHashtag(Candidate candidate) {
     case League.Germany2:
       return '';
     case League.Italy1:
-      return '';
+      return '#${_teamHashtagItaly1(candidate.candidateFixture.homeTeam)}${_teamHashtagItaly1(candidate.candidateFixture.awayTeam)}';
     case League.Italy2:
       return '';
     case League.Spain1:
       return '#${_teamHashtagSpain1(candidate.candidateFixture.homeTeam)}${_teamHashtagSpain1(candidate.candidateFixture.awayTeam)}';
     case League.France1:
-      return '';
+      return '#${_teamHashtagFrance1(candidate.candidateFixture.homeTeam)}${_teamHashtagFrance1(candidate.candidateFixture.awayTeam)}';
     case League.France2:
       return '';
     case League.Netherlands1:
-      return '';
+      return '#${_teamHashtagNetherlands1(candidate.candidateFixture.homeTeam)}${_teamHashtagNetherlands1(candidate.candidateFixture.awayTeam)}';
     case League.Belgium1:
       return '';
     case League.Portugal1:
@@ -259,6 +259,192 @@ String _teamHashtagSpain1(String teamName) {
   }
   else if (teamName == 'Valencia') {
     return 'FCValencia';
+  }
+  return '';
+}
+
+String _teamHashtagItaly1(String teamName) {
+  if (teamName == 'Torino') {
+    return 'Torino';
+  }
+  else if (teamName == 'Milan') {
+    return 'Milan';
+  }
+  else if (teamName == 'Sassuolo') {
+    return 'Sassuolo';
+  }
+  else if (teamName == 'Juventus') {
+    return 'Juve';
+  }
+  else if (teamName == 'Sampdoria') {
+    return 'Samp';
+  }
+  else if (teamName == 'Spezia') {
+    return 'Spezia';
+  }
+  else if (teamName == 'Lazio') {
+    return 'Lazio';
+  }
+  else if (teamName == 'Parma') {
+    return 'Parma';
+  }
+  else if (teamName == 'Inter') {
+    return 'Inter';
+  }
+  else if (teamName == 'Roma') {
+    return 'Roma';
+  }
+  else if (teamName == 'Bologna') {
+    return 'Bologna';
+  }
+  else if (teamName == 'Genoa') {
+    return 'Genoa';
+  }
+  else if (teamName == 'Atalanta') {
+    return 'Atalanta';
+  }
+  else if (teamName == 'Benevento') {
+    return 'Benevento';
+  }
+  else if (teamName == 'Cagliari') {
+    return 'Cagliari';
+  }
+  else if (teamName == 'Fiorentina') {
+    return 'Fiorentina';
+  }
+  else if (teamName == 'Napoli') {
+    return 'Napoli';
+  }
+  else if (teamName == 'Udinese') {
+    return 'Udinese';
+  }
+  else if (teamName == 'Verona') {
+    return 'Verona';
+  }
+  else if (teamName == 'Crotone') {
+    return 'Crotone';
+  }
+  return '';
+}
+
+String _teamHashtagFrance1(String teamName) {
+  if (teamName == 'Rennes') {
+    return 'SRFC';
+  }
+  else if (teamName == 'Paris SG') {
+    return 'PSG';
+  }
+  else if (teamName == 'Reims') {
+    return 'SDR';
+  }
+  else if (teamName == 'Monaco') {
+    return 'ASM';
+  }
+  else if (teamName == 'Strasbourg') {
+    return 'RCSA';
+  }
+  else if (teamName == 'Montpellier') {
+    return 'MHSC';
+  }
+  else if (teamName == 'Nice') {
+    return 'OGCN';
+  }
+  else if (teamName == 'Brest') {
+    return 'SB29';
+  }
+  else if (teamName == 'Metz') {
+    return 'FCM';
+  }
+  else if (teamName == 'Nimes') {
+    return 'NO';
+  }
+  else if (teamName == 'Angers') {
+    return 'SCO';
+  }
+  else if (teamName == 'Dijon') {
+    return 'DFCO';
+  }
+  else if (teamName == 'St Etienne') {
+    return 'ASSE';
+  }
+  else if (teamName == 'Marseille') {
+    return 'OM';
+  }
+  else if (teamName == 'Lyon') {
+    return 'OL';
+  }
+  else if (teamName == 'Lorient') {
+    return 'FCL';
+  }
+  else if (teamName == 'Nantes') {
+    return 'FCN';
+  }
+  else if (teamName == 'Bordeaux') {
+    return 'FCGB';
+  }
+  else if (teamName == 'Lens') {
+    return 'RCL';
+  }
+  else if (teamName == 'Lille') {
+    return 'LOSC';
+  }
+  return '';
+}
+
+String _teamHashtagNetherlands1(String teamName) {
+  if (teamName == 'Willem II') {
+    return 'WIL';
+  }
+  else if (teamName == 'PSV Eindhoven') {
+    return 'PSV';
+  }
+  else if (teamName == 'Zwolle') {
+    return 'PEC';
+  }
+  else if (teamName == 'Den Haag') {
+    return 'ADO';
+  }
+  else if (teamName == 'Feyenoord') {
+    return 'FEY';
+  }
+  else if (teamName == 'Ajax') {
+    return 'AJA';
+  }
+  else if (teamName == 'FC Emmen') {
+    return 'EMM';
+  }
+  else if (teamName == 'Groningen') {
+    return 'GRO';
+  }
+  else if (teamName == 'VVV Venlo') {
+    return 'VVV';
+  }
+  else if (teamName == 'Waalwijk') {
+    return 'RKC';
+  }
+  else if (teamName == 'AZ Alkmaar') {
+    return 'AZ';
+  }
+  else if (teamName == 'For Sittard') {
+    return 'FOR';
+  }
+  else if (teamName == 'Heerenveen') {
+    return 'HEE';
+  }
+  else if (teamName == 'Utrecht') {
+    return 'UTR';
+  }
+  else if (teamName == 'Twente') {
+    return 'TWE';
+  }
+  else if (teamName == 'Heracles') {
+    return 'HER';
+  }
+  else if (teamName == 'Sparta Rotterdam') {
+    return 'SPA';
+  }
+  else if (teamName == 'Vitesse') {
+    return 'VIT';
   }
   return '';
 }
