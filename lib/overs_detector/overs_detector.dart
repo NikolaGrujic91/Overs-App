@@ -109,6 +109,7 @@ class OversDetector extends ChangeNotifier {
       _candidates.add(candidate);
     }
 
+    _candidates.sort((c1, c2) => c1.candidateFixture.date.compareTo(c2.candidateFixture.date));
     notifyListeners();
   }
 
