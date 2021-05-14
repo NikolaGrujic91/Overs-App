@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:overs_app/utils/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:overs_app/overs_detector/overs_detector.dart';
 import 'package:overs_app/screens/main_screen.dart';
@@ -15,6 +16,9 @@ class OversApp extends StatelessWidget {
       create: (context) => OversDetector(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark().copyWith(
+          highlightColor: kBackgroundColorDarkGrey,
+        ),
         home: MainScreen(),
       ),
     );
