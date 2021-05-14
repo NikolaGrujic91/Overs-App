@@ -30,8 +30,23 @@ class Candidate {
 
   //#region Methods
 
-  String toShortString() {
-    return _candidateFixture.toString();
+  String historyString() {
+    var stringBuffer = StringBuffer();
+
+    stringBuffer.writeln('Home team recent results at home:');
+    for (var fixture in _homeTeamPreviousFixtures) {
+      stringBuffer.writeln('${fixture.teamsString()} ${fixture.homeScore} : ${fixture.awayScore}');
+    }
+
+    stringBuffer.writeln();
+
+    stringBuffer.writeln('Away team recent results as guest:');
+    for (var fixture in _awayTeamPreviousFixtures) {
+      stringBuffer.writeln('${fixture.teamsString()} ${fixture.homeScore} : ${fixture.awayScore}');
+    }
+
+    stringBuffer.writeln();
+    return stringBuffer.toString();
   }
 
   @override

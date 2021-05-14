@@ -19,7 +19,7 @@ class CandidatesListTile extends StatelessWidget {
           style: kTileTextStyle,
         ),
         subtitle: Text(
-          candidateFound ? '${candidate.candidateFixture.leagueName}, ${candidate.candidateFixture.timeString()}' : '',
+          candidateFound ? '${candidate.candidateFixture.leagueName}, ${candidate.candidateFixture.timeString()}\n\n${candidate.historyString()}' : '',
           style: kTileTextStyle,
         ),
         trailing: Text(
