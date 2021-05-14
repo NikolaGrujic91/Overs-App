@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:overs_app/widgets/candidates_list.dart';
 import 'package:overs_app/widgets/run_icon_button.dart';
 import 'package:overs_app/widgets/export_icon_button.dart';
+import 'package:overs_app/utils/constants.dart';
 
 class MainScreen extends StatelessWidget {
   @override
@@ -11,17 +12,17 @@ class MainScreen extends StatelessWidget {
         title: Text(
           'Overs',
           style: TextStyle(
-            color: Colors.black,
+            color: kTextColorWhite,
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.orange,
+        backgroundColor: kBackgroundColorMidnightBlue,
         actions: <Widget>[
           RunIconButton(),
           ExportIconButton(),
         ],
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: kBackgroundColorBlack,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

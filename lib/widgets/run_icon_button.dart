@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:overs_app/overs_detector/overs_detector.dart';
+import 'package:overs_app/utils/constants.dart';
 
 class RunIconButton extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _RunIconButtonState extends State<RunIconButton> {
   Widget build(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.play_arrow),
-      color: _pressed ? Colors.orange : Colors.black,
+      color: kTextColorWhite,
       disabledColor: Colors.black,
       tooltip: 'Find candidates',
       onPressed: _pressed

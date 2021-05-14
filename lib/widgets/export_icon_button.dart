@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:overs_app/utils/exporter.dart';
+import 'package:overs_app/utils/constants.dart';
 
 class ExportIconButton extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _ExportIconButtonState extends State<ExportIconButton> {
   Widget build(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.import_export),
-      color: _pressed ? Colors.orange : Colors.black,
+      color: kTextColorWhite,
       disabledColor: Colors.black,
       tooltip: 'Export candidates',
       onPressed: _pressed
