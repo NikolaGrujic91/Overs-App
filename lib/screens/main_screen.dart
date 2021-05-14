@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:overs_app/widgets/run_button.dart';
 import 'package:overs_app/widgets/candidates_list.dart';
-import 'package:overs_app/utils/exporter.dart';
+import 'package:overs_app/widgets/run_icon_button.dart';
+import 'package:overs_app/widgets/export_icon_button.dart';
 
 class MainScreen extends StatelessWidget {
   @override
@@ -17,13 +17,8 @@ class MainScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.orange,
         actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.import_export),
-            tooltip: 'Export candidates',
-            onPressed: () async {
-              await Exporter.export(context);
-            },
-          ),
+          RunIconButton(),
+          ExportIconButton(),
         ],
       ),
       backgroundColor: Colors.white,
@@ -31,7 +26,6 @@ class MainScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           CandidatesList(),
-          RunButton(),
         ],
       ),
     );
