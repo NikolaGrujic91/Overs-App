@@ -28,7 +28,7 @@ String leagueToHashtag(League league) {
     case League.Belgium1:
       return '#jupilerproleague';
     case League.Portugal1:
-      return '#PrimeiraLiga';
+      return '#LigaNOS';
     case League.Turkey1:
       return '#SuperLig';
     case League.Greece1:
@@ -66,7 +66,7 @@ String candidateToHashtag(Candidate candidate) {
     case League.Belgium1:
       return '';
     case League.Portugal1:
-      return '';
+      return '#${_teamHashtagPortugal1(candidate.candidateFixture.homeTeam)}${_teamHashtagPortugal1(candidate.candidateFixture.awayTeam)}';
     case League.Turkey1:
       return '#${_teamHashtagTurkey1(candidate.candidateFixture.homeTeam)}v${_teamHashtagTurkey1(candidate.candidateFixture.awayTeam)}';
     case League.Greece1:
@@ -380,6 +380,47 @@ String _teamHashtagTurkey1(String teamName) {
     return 'KON';
   } else if (teamName == 'Trabzonspor') {
     return 'TS';
+  }
+  return '';
+}
+
+String _teamHashtagPortugal1(String teamName) {
+  if (teamName == 'Maritimo') {
+    return 'CSM';
+  } else if (teamName == 'Guimaraes') {
+    return 'VSC';
+  } else if (teamName == 'Belenenses') {
+    return 'BFS';
+  } else if (teamName == 'Santa Clara') {
+    return 'CDSC';
+  } else if (teamName == 'Famalicao') {
+    return 'FCF';
+  } else if (teamName == 'Nacional') {
+    return 'CDN';
+  } else if (teamName == 'Rio Ave') {
+    return 'RAFC';
+  } else if (teamName == 'Porto') {
+    return 'FCP';
+  } else if (teamName == 'Benfica') {
+    return 'SLB';
+  } else if (teamName == 'Sp Lisbon') {
+    return 'SCP';
+  } else if (teamName == 'Farense') {
+    return 'SCF';
+  } else if (teamName == 'Tondela') {
+    return 'CDT';
+  } else if (teamName == 'Boavista') {
+    return 'BFC';
+  } else if (teamName == 'Portimonense') {
+    return 'PSC';
+  } else if (teamName == 'Sp Braga') {
+    return 'SCB';
+  } else if (teamName == 'Moreirense') {
+    return 'MFC';
+  } else if (teamName == 'Pacos Ferreira') {
+    return 'FCPF';
+  } else if (teamName == 'Gil Vicente') {
+    return 'GVFC';
   }
   return '';
 }
