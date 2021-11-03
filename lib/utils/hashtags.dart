@@ -380,6 +380,8 @@ String _teamHashtagTurkey1(String teamName) {
     return 'KON';
   } else if (teamName == 'Trabzonspor') {
     return 'TS';
+  } else if (teamName == 'Ad. Demirspor') {
+    return 'ADS';
   }
   return '';
 }
