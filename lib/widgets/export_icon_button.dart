@@ -1,10 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:overs_app/utils/exporter.dart';
-import 'package:overs_app/utils/constants.dart';
+// Copyright 2022 Nikola Grujic. All rights reserved.
+// Use of this source code is governed by a GNU-style license that can be
+// found in the LICENSE file.
 
+import 'package:flutter/material.dart';
+import 'package:overs_app/overs_detector/overs_detector.dart';
+import 'package:overs_app/utils/constants.dart';
+import 'package:overs_app/utils/exporter.dart';
+import 'package:provider/provider.dart';
+
+/// Widget that represents export button
 class ExportIconButton extends StatefulWidget {
+  /// Create new instance
+  const ExportIconButton({Key? key}) : super(key: key);
+
   @override
-  _ExportIconButtonState createState() => _ExportIconButtonState();
+  State<ExportIconButton> createState() => _ExportIconButtonState();
 }
 
 class _ExportIconButtonState extends State<ExportIconButton> {
@@ -21,14 +31,17 @@ class _ExportIconButtonState extends State<ExportIconButton> {
           ? null
           : () async {
               if (!_pressed) {
+                final oversDetector =
+                    Provider.of<OversDetector>(context, listen: false);
                 _setPressed(pressed: true);
-                await Exporter.export(context).then((value) => _setPressed(pressed: false));
+                await export(oversDetector.candidates)
+                    .then((value) => _setPressed(pressed: false));
               }
             },
     );
   }
 
-  void _setPressed({bool pressed}) {
+  void _setPressed({required bool pressed}) {
     setState(() {
       _pressed = pressed;
     });

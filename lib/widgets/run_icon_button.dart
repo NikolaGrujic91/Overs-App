@@ -1,11 +1,19 @@
+// Copyright 2022 Nikola Grujic. All rights reserved.
+// Use of this source code is governed by a GNU-style license that can be
+// found in the LICENSE file.
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:overs_app/overs_detector/overs_detector.dart';
 import 'package:overs_app/utils/constants.dart';
+import 'package:provider/provider.dart';
 
+/// Widget representing run button
 class RunIconButton extends StatefulWidget {
+  /// Creates new instance
+  const RunIconButton({Key? key}) : super(key: key);
+
   @override
-  _RunIconButtonState createState() => _RunIconButtonState();
+  State<RunIconButton> createState() => _RunIconButtonState();
 }
 
 class _RunIconButtonState extends State<RunIconButton> {
@@ -23,14 +31,17 @@ class _RunIconButtonState extends State<RunIconButton> {
           : () async {
               if (!_pressed) {
                 _setPressed(pressed: true);
-                var oversDetector = Provider.of<OversDetector>(context, listen: false);
-                await oversDetector.run().then((value) => _setPressed(pressed: false));
+                final oversDetector =
+                    Provider.of<OversDetector>(context, listen: false);
+                await oversDetector
+                    .run()
+                    .then((value) => _setPressed(pressed: false));
               }
             },
     );
   }
 
-  void _setPressed({bool pressed}) {
+  void _setPressed({required bool pressed}) {
     setState(() {
       _pressed = pressed;
     });

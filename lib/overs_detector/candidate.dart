@@ -1,73 +1,76 @@
-import 'dart:collection';
+// Copyright 2022 Nikola Grujic. All rights reserved.
+// Use of this source code is governed by a GNU-style license that can be
+// found in the LICENSE file.
+
 import 'package:overs_app/data_collector/fixture.dart';
 
+/// Class represents a potential candidate fixture
 class Candidate {
-  //#region Fields
+  /// Create new instance
+  Candidate({
+    required this.candidateFixture,
+    required this.homeTeamPreviousFixtures,
+    required this.awayTeamPreviousFixtures,
+  });
 
-  Fixture _candidateFixture;
-  List<Fixture> _homeTeamPreviousFixtures;
-  List<Fixture> _awayTeamPreviousFixtures;
+  /// Candidate fixture
+  Fixture candidateFixture;
 
-  //#endregion
+  /// Previous 3 fixtures of home team at home
+  List<Fixture> homeTeamPreviousFixtures;
 
-  //#region Constructors
+  /// Previous 3 fixtures of away team at guest
+  List<Fixture> awayTeamPreviousFixtures;
 
-  Candidate({Fixture candidateFixture, List<Fixture> homeTeamPreviousFixtures, List<Fixture> awayTeamPreviousFixtures}) {
-    _candidateFixture = candidateFixture;
-    _homeTeamPreviousFixtures = homeTeamPreviousFixtures;
-    _awayTeamPreviousFixtures = awayTeamPreviousFixtures;
-  }
-
-  //#endregion
-
-  //#region Getters
-
-  Fixture get candidateFixture => _candidateFixture;
-  UnmodifiableListView<Fixture> get homeTeamPreviousFixtures => _homeTeamPreviousFixtures;
-  UnmodifiableListView<Fixture> get awayTeamPreviousFixtures => _awayTeamPreviousFixtures;
-
-  //#endregion
-
-  //#region Methods
-
+  /// Return history
   String historyString() {
-    var stringBuffer = StringBuffer();
+    final stringBuffer = StringBuffer();
 
     stringBuffer.writeln('Home team recent results at home:');
-    for (var fixture in _homeTeamPreviousFixtures) {
-      stringBuffer.writeln('${fixture.teamsString()} ${fixture.homeScore} : ${fixture.awayScore}');
+
+    for (final fixture in homeTeamPreviousFixtures) {
+      stringBuffer.writeln(
+        '${fixture.teamsString()} '
+        '${fixture.homeScore} : ${fixture.awayScore}',
+      );
     }
 
     stringBuffer.writeln();
 
     stringBuffer.writeln('Away team recent results as guest:');
-    for (var fixture in _awayTeamPreviousFixtures) {
-      stringBuffer.writeln('${fixture.teamsString()} ${fixture.homeScore} : ${fixture.awayScore}');
+
+    for (final fixture in awayTeamPreviousFixtures) {
+      stringBuffer.writeln(
+        '${fixture.teamsString()} '
+        '${fixture.homeScore} : ${fixture.awayScore}',
+      );
     }
 
     stringBuffer.writeln();
+
     return stringBuffer.toString();
   }
 
   @override
   String toString() {
-    var stringBuffer = StringBuffer();
+    final stringBuffer = StringBuffer();
 
-    stringBuffer.writeln(_candidateFixture.toString());
+    stringBuffer.writeln(candidateFixture.toString());
 
     stringBuffer.writeln('Home team recent results:');
-    for (var fixture in _homeTeamPreviousFixtures) {
+
+    for (final fixture in homeTeamPreviousFixtures) {
       stringBuffer.writeln(fixture.toString());
     }
 
     stringBuffer.writeln('Away team recent results:');
-    for (var fixture in _awayTeamPreviousFixtures) {
+
+    for (final fixture in awayTeamPreviousFixtures) {
       stringBuffer.writeln(fixture.toString());
     }
 
     stringBuffer.writeln();
+
     return stringBuffer.toString();
   }
-
-  //#endregion
 }

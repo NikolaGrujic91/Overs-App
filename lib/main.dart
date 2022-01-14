@@ -1,14 +1,22 @@
+// Copyright 2022 Nikola Grujic. All rights reserved.
+// Use of this source code is governed by a GNU-style license that can be
+// found in the LICENSE file.
+
 import 'package:flutter/material.dart';
-import 'package:overs_app/utils/constants.dart';
-import 'package:provider/provider.dart';
 import 'package:overs_app/overs_detector/overs_detector.dart';
 import 'package:overs_app/screens/main_screen.dart';
+import 'package:overs_app/utils/constants.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(OversApp());
+  runApp(const OversApp());
 }
 
+/// Main widget
 class OversApp extends StatelessWidget {
+  /// Creates new instance
+  const OversApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -19,7 +27,7 @@ class OversApp extends StatelessWidget {
         theme: ThemeData.dark().copyWith(
           highlightColor: kBackgroundColorDarkGrey,
         ),
-        home: MainScreen(),
+        home: const MainScreen(),
       ),
     );
   }

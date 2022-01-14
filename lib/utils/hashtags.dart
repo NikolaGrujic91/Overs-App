@@ -1,82 +1,95 @@
+// Copyright 2022 Nikola Grujic. All rights reserved.
+// Use of this source code is governed by a GNU-style license that can be
+// found in the LICENSE file.
+
 import 'package:overs_app/data_collector/enums.dart';
 import 'package:overs_app/overs_detector/candidate.dart';
 
+/// Get league hashtag
 String leagueToHashtag(League league) {
   switch (league) {
-    case League.England1:
+    case League.england1:
       return '#PL';
-    case League.England2:
+    case League.england2:
       return '#EFL';
-    case League.Scotland1:
+    case League.scotland1:
       return '#SPFL';
-    case League.Germany1:
+    case League.germany1:
       return '#Bundesliga';
-    case League.Germany2:
+    case League.germany2:
       return '#Bundesliga2';
-    case League.Italy1:
+    case League.italy1:
       return '#SerieA';
-    case League.Italy2:
+    case League.italy2:
       return '#SerieB';
-    case League.Spain1:
+    case League.spain1:
       return '#LaLigaSantander';
-    case League.France1:
+    case League.france1:
       return '#Ligue1';
-    case League.France2:
+    case League.france2:
       return '#Ligue2';
-    case League.Netherlands1:
+    case League.netherlands1:
       return '#Eredivisie';
-    case League.Belgium1:
+    case League.belgium1:
       return '#jupilerproleague';
-    case League.Portugal1:
+    case League.portugal1:
       return '#LigaNOS';
-    case League.Turkey1:
+    case League.turkey1:
       return '#SuperLig';
-    case League.Greece1:
+    case League.greece1:
       return '#slgr';
-    case League.None:
-    default:
+    case League.none:
       return '';
   }
 }
 
+///Get candidate fixture hashtag
 String candidateToHashtag(Candidate candidate) {
   switch (candidate.candidateFixture.league) {
-    case League.England1:
-      return '#${_teamHashtagEngland1(candidate.candidateFixture.homeTeam)}${_teamHashtagEngland1(candidate.candidateFixture.awayTeam)}';
-    case League.England2:
+    case League.england1:
+      return '#${_teamHashtagEngland1(candidate.candidateFixture.homeTeam)}'
+          '${_teamHashtagEngland1(candidate.candidateFixture.awayTeam)}';
+    case League.england2:
       return '';
-    case League.Scotland1:
+    case League.scotland1:
       return '';
-    case League.Germany1:
-      return '#${_teamHashtagGermany1(candidate.candidateFixture.homeTeam)}${_teamHashtagGermany1(candidate.candidateFixture.awayTeam)}';
-    case League.Germany2:
+    case League.germany1:
+      return '#${_teamHashtagGermany1(candidate.candidateFixture.homeTeam)}'
+          '${_teamHashtagGermany1(candidate.candidateFixture.awayTeam)}';
+    case League.germany2:
       return '';
-    case League.Italy1:
-      return '#${_teamHashtagItaly1(candidate.candidateFixture.homeTeam)}${_teamHashtagItaly1(candidate.candidateFixture.awayTeam)}';
-    case League.Italy2:
+    case League.italy1:
+      return '#${_teamHashtagItaly1(candidate.candidateFixture.homeTeam)}'
+          '${_teamHashtagItaly1(candidate.candidateFixture.awayTeam)}';
+    case League.italy2:
       return '';
-    case League.Spain1:
-      return '#${_teamHashtagSpain1(candidate.candidateFixture.homeTeam)}${_teamHashtagSpain1(candidate.candidateFixture.awayTeam)}';
-    case League.France1:
-      return '#${_teamHashtagFrance1(candidate.candidateFixture.homeTeam)}${_teamHashtagFrance1(candidate.candidateFixture.awayTeam)}';
-    case League.France2:
+    case League.spain1:
+      return '#${_teamHashtagSpain1(candidate.candidateFixture.homeTeam)}'
+          '${_teamHashtagSpain1(candidate.candidateFixture.awayTeam)}';
+    case League.france1:
+      return '#${_teamHashtagFrance1(candidate.candidateFixture.homeTeam)}'
+          '${_teamHashtagFrance1(candidate.candidateFixture.awayTeam)}';
+    case League.france2:
       return '';
-    case League.Netherlands1:
-      return '#${_teamHashtagNetherlands1(candidate.candidateFixture.homeTeam)}${_teamHashtagNetherlands1(candidate.candidateFixture.awayTeam)}';
-    case League.Belgium1:
+    case League.netherlands1:
+      return '#${_teamHashtagNetherlands1(candidate.candidateFixture.homeTeam)}'
+          '${_teamHashtagNetherlands1(candidate.candidateFixture.awayTeam)}';
+    case League.belgium1:
       return '';
-    case League.Portugal1:
-      return '#${_teamHashtagPortugal1(candidate.candidateFixture.homeTeam)}${_teamHashtagPortugal1(candidate.candidateFixture.awayTeam)}';
-    case League.Turkey1:
-      return '#${_teamHashtagTurkey1(candidate.candidateFixture.homeTeam)}v${_teamHashtagTurkey1(candidate.candidateFixture.awayTeam)}';
-    case League.Greece1:
+    case League.portugal1:
+      return '#${_teamHashtagPortugal1(candidate.candidateFixture.homeTeam)}'
+          '${_teamHashtagPortugal1(candidate.candidateFixture.awayTeam)}';
+    case League.turkey1:
+      return '#${_teamHashtagTurkey1(candidate.candidateFixture.homeTeam)}v'
+          '${_teamHashtagTurkey1(candidate.candidateFixture.awayTeam)}';
+    case League.greece1:
       return '';
-    case League.None:
-    default:
+    case League.none:
       return '';
   }
 }
 
+/// Get hashtag for England teams
 String _teamHashtagEngland1(String teamName) {
   if (teamName == 'Fulham') {
     return 'FUL';
@@ -119,9 +132,11 @@ String _teamHashtagEngland1(String teamName) {
   } else if (teamName == 'Man City') {
     return 'MCI';
   }
+
   return '';
 }
 
+/// Get hashtag for Germany teams
 String _teamHashtagGermany1(String teamName) {
   if (teamName == 'Bayern Munich') {
     return 'FCB';
@@ -149,7 +164,7 @@ String _teamHashtagGermany1(String teamName) {
     return 'BSC';
   } else if (teamName == 'Dortmund') {
     return 'BVB';
-  } else if (teamName == 'M\'gladbach') {
+  } else if (teamName == "M'gladbach") {
     return 'BMG';
   } else if (teamName == 'RB Leipzig') {
     return 'RBL';
@@ -160,9 +175,11 @@ String _teamHashtagGermany1(String teamName) {
   } else if (teamName == 'Leverkusen') {
     return 'B04';
   }
+
   return '';
 }
 
+/// Get hashtag for Spain teams
 String _teamHashtagSpain1(String teamName) {
   if (teamName == 'Betis') {
     return 'RealBetis';
@@ -205,9 +222,11 @@ String _teamHashtagSpain1(String teamName) {
   } else if (teamName == 'Valencia') {
     return 'FCValencia';
   }
+
   return '';
 }
 
+/// Get hashtag for Italy teams
 String _teamHashtagItaly1(String teamName) {
   if (teamName == 'Torino') {
     return 'Torino';
@@ -250,9 +269,11 @@ String _teamHashtagItaly1(String teamName) {
   } else if (teamName == 'Crotone') {
     return 'Crotone';
   }
+
   return '';
 }
 
+/// Get hashtag for France teams
 String _teamHashtagFrance1(String teamName) {
   if (teamName == 'Rennes') {
     return 'SRFC';
@@ -295,9 +316,11 @@ String _teamHashtagFrance1(String teamName) {
   } else if (teamName == 'Lille') {
     return 'LOSC';
   }
+
   return '';
 }
 
+/// Get hashtag for Netherlands teams
 String _teamHashtagNetherlands1(String teamName) {
   if (teamName == 'Willem II') {
     return 'WIL';
@@ -336,9 +359,11 @@ String _teamHashtagNetherlands1(String teamName) {
   } else if (teamName == 'Vitesse') {
     return 'VIT';
   }
+
   return '';
 }
 
+/// Get hashtag for Turkey teams
 String _teamHashtagTurkey1(String teamName) {
   if (teamName == 'Yeni Malatyaspor') {
     return 'YMS';
@@ -383,9 +408,11 @@ String _teamHashtagTurkey1(String teamName) {
   } else if (teamName == 'Ad. Demirspor') {
     return 'ADS';
   }
+
   return '';
 }
 
+/// Get hashtag for Portugal teams
 String _teamHashtagPortugal1(String teamName) {
   if (teamName == 'Maritimo') {
     return 'CSM';
@@ -424,5 +451,6 @@ String _teamHashtagPortugal1(String teamName) {
   } else if (teamName == 'Gil Vicente') {
     return 'GVFC';
   }
+
   return '';
 }

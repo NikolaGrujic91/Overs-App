@@ -1,57 +1,53 @@
+// Copyright 2022 Nikola Grujic. All rights reserved.
+// Use of this source code is governed by a GNU-style license that can be
+// found in the LICENSE file.
+
 import 'dart:collection';
+
 import 'package:flutter/foundation.dart';
+import 'package:overs_app/data_collector/collector.dart';
 import 'package:overs_app/data_collector/enums.dart';
 import 'package:overs_app/data_collector/fixture.dart';
-import 'package:overs_app/data_collector/collector.dart';
-import 'candidate.dart';
 
+import 'package:overs_app/overs_detector/candidate.dart';
+
+/// Class for detecting over 2.5 goals candidate fixtures
 class OversDetector extends ChangeNotifier {
-  //#region Fields
-
-  List<Candidate> _candidates;
-  List<Fixture> _fixtures;
-  LinkedHashMap<League, List<Fixture>> _results;
-
-  //#endregion
-
-  //#region Constructors
-
-  OversDetector() {
-    _candidates = <Candidate>[];
-    _fixtures = <Fixture>[];
-    _results = LinkedHashMap<League, List<Fixture>>();
-  }
-
-  //#endregion
-
-  //#region Getters
+  /// Creates new instance
+  OversDetector();
 
   /// List of fixtures that fulfill over 2.5 goals requirements.
-  UnmodifiableListView<Candidate> get candidates => UnmodifiableListView(_candidates);
+  List<Candidate> candidates = [];
 
-  UnmodifiableListView<Fixture> get fixtures => UnmodifiableListView(_fixtures);
+  /// List of fixtures to be played
+  List<Fixture> fixtures = [];
 
-  //#endregion
+  /// Results of previously finished fixtures per league
+  LinkedHashMap<League, List<Fixture>> results =
+      LinkedHashMap<League, List<Fixture>>();
 
-  //#region Methods
-
-  /// Execute algorithm for finding fixtures that fulfill over 2.5 goals requirements.
+  /// Execute algorithm for finding fixtures that
+  /// fulfill over 2.5 goals requirements.
   ///
   /// Usage:
   ///
   /// ```
   /// var oversDetector = OversDetector();
-  /// await oversDetector.run().then((value) => print(oversDetector.candidates));
+  /// await oversDetector.run().then((value)
+  ///   => print(oversDetector.candidates));
   /// ```
   ///
   Future<void> run() async {
-    var collector = Collector();
-    await collector.collect().then((value) => _processCollectResponse(collector)).then((value) => _run());
+    final collector = Collector();
+    await collector
+        .collect()
+        .then((value) => _processCollectResponse(collector))
+        .then((value) => _run());
   }
 
   void _processCollectResponse(Collector collector) {
-    _fixtures = collector.fixtures;
-    _results = collector.results;
+    fixtures = collector.fixtures;
+    results = collector.results;
   }
 
   /// Algorithm
@@ -66,18 +62,20 @@ class OversDetector extends ChangeNotifier {
   ///
   /// 1. The away team MUST have had 7 goals or MORE in their last 3 away games.
   ///
-  /// 2. The PREVIOUS game... must have had 2 or more goals in total for the entire game.
+  /// 2. The PREVIOUS game... must have had 2 or more goals in total
+  /// for the entire game.
   ///
   /// 3. The away team MUST have scored in 2 or 3 of the last 3 games.
   ///
   /// 4. 2 or 3 of the 3 previous games must have ended over 2.5.
   void _run() {
-    for (Fixture fixture in _fixtures) {
+    for (final fixture in fixtures) {
       if (!_checkOverOdd(fixture.overOdd)) {
         continue;
       }
 
-      List<Fixture> homeTeamPreviousFixtures = _getHomeTeamResults(fixture.homeTeam, fixture.league);
+      final homeTeamPreviousFixtures =
+          _getHomeTeamResults(fixture.homeTeam, fixture.league);
 
       if (_numberOfGoals(homeTeamPreviousFixtures) < 7) {
         continue;
@@ -87,7 +85,8 @@ class OversDetector extends ChangeNotifier {
         continue;
       }
 
-      List<Fixture> awayTeamPreviousFixtures = _getAwayTeamResults(fixture.awayTeam, fixture.league);
+      final awayTeamPreviousFixtures =
+          _getAwayTeamResults(fixture.awayTeam, fixture.league);
 
       if (_numberOfGoals(awayTeamPreviousFixtures) < 7) {
         continue;
@@ -105,19 +104,25 @@ class OversDetector extends ChangeNotifier {
         continue;
       }
 
-      var candidate = Candidate(candidateFixture: fixture, homeTeamPreviousFixtures: homeTeamPreviousFixtures, awayTeamPreviousFixtures: awayTeamPreviousFixtures);
-      _candidates.add(candidate);
+      final candidate = Candidate(
+        candidateFixture: fixture,
+        homeTeamPreviousFixtures: homeTeamPreviousFixtures,
+        awayTeamPreviousFixtures: awayTeamPreviousFixtures,
+      );
+      candidates.add(candidate);
     }
 
-    _candidates.sort((c1, c2) => c1.candidateFixture.date.compareTo(c2.candidateFixture.date));
+    candidates.sort(
+      (c1, c2) => c1.candidateFixture.date.compareTo(c2.candidateFixture.date),
+    );
     notifyListeners();
   }
 
   int _teamScored(List<Fixture> awayTeamPreviousFixtures) {
-    int scored = 0;
+    var scored = 0;
 
-    for (Fixture fixture in awayTeamPreviousFixtures) {
-      if (fixture.awayScore > 0) {
+    for (final fixture in awayTeamPreviousFixtures) {
+      if (fixture.awayScore! > 0) {
         scored++;
       }
     }
@@ -130,20 +135,20 @@ class OversDetector extends ChangeNotifier {
   }
 
   int _numberOfGoals(List<Fixture> previousFixtures) {
-    int totalGoals = 0;
+    var totalGoals = 0;
 
-    for (Fixture fixture in previousFixtures) {
-      totalGoals += fixture.homeScore + fixture.awayScore;
+    for (final fixture in previousFixtures) {
+      totalGoals += fixture.homeScore! + fixture.awayScore!;
     }
 
     return totalGoals;
   }
 
   int _numberOfOverFixtures(List<Fixture> previousFixtures) {
-    int overFixtures = 0;
+    var overFixtures = 0;
 
-    for (Fixture fixture in previousFixtures) {
-      if ((fixture.homeScore + fixture.awayScore) > 2) {
+    for (final fixture in previousFixtures) {
+      if ((fixture.homeScore! + fixture.awayScore!) > 2) {
         overFixtures++;
       }
     }
@@ -152,22 +157,22 @@ class OversDetector extends ChangeNotifier {
   }
 
   List<Fixture> _getHomeTeamResults(String teamName, League league) {
-    var recentResults = <Fixture>[];
+    final recentResults = <Fixture>[];
 
-    if (_results.containsKey(league)) {
-      List<Fixture> results = _results[league];
+    if (!results.containsKey(league)) {
+      return recentResults;
+    }
 
-      int recentCount = 3;
-      int count = results.length;
+    final resultsForLeague = results[league] ?? [];
+    var recentCount = 3;
 
-      for (int i = count - 1; i >= 0; i--) {
-        if (results[i].homeTeam == teamName) {
-          recentResults.add(results[i]);
-          recentCount--;
+    for (final resultForLeague in resultsForLeague) {
+      if (resultForLeague.homeTeam == teamName) {
+        recentResults.add(resultForLeague);
+        recentCount--;
 
-          if (recentCount == 0) {
-            break;
-          }
+        if (recentCount == 0) {
+          break;
         }
       }
     }
@@ -176,28 +181,26 @@ class OversDetector extends ChangeNotifier {
   }
 
   List<Fixture> _getAwayTeamResults(String teamName, League league) {
-    var recentResults = <Fixture>[];
+    final recentResults = <Fixture>[];
 
-    if (_results.containsKey(league)) {
-      List<Fixture> results = _results[league];
+    if (!results.containsKey(league)) {
+      return recentResults;
+    }
 
-      int recentCount = 3;
-      int count = results.length;
+    final resultsForLeague = results[league] ?? [];
+    var recentCount = 3;
 
-      for (int i = count - 1; i >= 0; i--) {
-        if (results[i].awayTeam == teamName) {
-          recentResults.add(results[i]);
-          recentCount--;
+    for (final resultForLeague in resultsForLeague) {
+      if (resultForLeague.awayTeam == teamName) {
+        recentResults.add(resultForLeague);
+        recentCount--;
 
-          if (recentCount == 0) {
-            break;
-          }
+        if (recentCount == 0) {
+          break;
         }
       }
     }
 
     return recentResults;
   }
-
-  //#endregion
 }

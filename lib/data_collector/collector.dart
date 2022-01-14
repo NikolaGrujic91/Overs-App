@@ -1,38 +1,31 @@
-import 'package:http/http.dart' as http;
-import 'dart:core';
+// Copyright 2022 Nikola Grujic. All rights reserved.
+// Use of this source code is governed by a GNU-style license that can be
+// found in the LICENSE file.
+
 import 'dart:collection';
 import 'dart:convert';
-import 'fixture.dart';
-import 'links.dart';
-import 'constants.dart';
-import 'enums.dart';
+import 'dart:core';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
+import 'package:overs_app/data_collector/constants.dart';
+import 'package:overs_app/data_collector/enums.dart';
+import 'package:overs_app/data_collector/fixture.dart';
+import 'package:overs_app/data_collector/links.dart';
+import 'package:overs_app/utils/utils.dart';
 
+/// Class for collecting data
 class Collector {
-  //#region Fields
+  /// Creates new instance
+  Collector();
 
-  List _fixtures;
-  LinkedHashMap _results;
+  /// List of fixtures
+  List<Fixture> fixtures = [];
 
-  //#endregion
+  /// Results per league
+  LinkedHashMap<League, List<Fixture>> results =
+      LinkedHashMap<League, List<Fixture>>();
 
-  //#region Constructors
-
-  Collector() {
-    _fixtures = <Fixture>[];
-    _results = LinkedHashMap<League, List<Fixture>>();
-  }
-
-  //#endregion
-
-  //#region Getters
-
-  List<Fixture> get fixtures => _fixtures;
-
-  LinkedHashMap<League, List<Fixture>> get results => _results;
-
-  //#endregion
-
-  //#region Methods
+  final int _fractionDigits = 2;
 
   /// Download fixtures and results and store them in memory.
   ///
@@ -40,117 +33,133 @@ class Collector {
   ///
   /// ```
   /// var collector = Collector();
-  /// await collector.collect().then((value) => _processCollectResponse(collector));
+  /// await collector.collect().then((value) =>
+  ///                                       _processCollectResponse(collector));
   /// ```
   ///
   Future<void> collect() async {
-    await _download(uri: Links.Fixtures, storeCallback: _storeFixtures);
+    await _download(uri: kFixtures, storeCallback: _storeFixtures);
 
-    await _download(uri: Links.England1, storeCallback: _storeResults);
-    await _download(uri: Links.England2, storeCallback: _storeResults);
-    await _download(uri: Links.Scotland1, storeCallback: _storeResults);
-    await _download(uri: Links.Germany1, storeCallback: _storeResults);
-    await _download(uri: Links.Germany2, storeCallback: _storeResults);
-    await _download(uri: Links.Italy1, storeCallback: _storeResults);
-    await _download(uri: Links.Italy2, storeCallback: _storeResults);
-    await _download(uri: Links.Spain1, storeCallback: _storeResults);
-    await _download(uri: Links.France1, storeCallback: _storeResults);
-    await _download(uri: Links.France2, storeCallback: _storeResults);
-    await _download(uri: Links.Netherlands1, storeCallback: _storeResults);
-    await _download(uri: Links.Belgium1, storeCallback: _storeResults);
-    await _download(uri: Links.Portugal1, storeCallback: _storeResults);
-    await _download(uri: Links.Turkey1, storeCallback: _storeResults);
-    await _download(uri: Links.Greece1, storeCallback: _storeResults);
+    await _download(uri: kEngland1, storeCallback: _storeResults);
+    await _download(uri: kEngland2, storeCallback: _storeResults);
+    await _download(uri: kScotland1, storeCallback: _storeResults);
+    await _download(uri: kGermany1, storeCallback: _storeResults);
+    await _download(uri: kGermany2, storeCallback: _storeResults);
+    await _download(uri: kItaly1, storeCallback: _storeResults);
+    await _download(uri: kItaly2, storeCallback: _storeResults);
+    await _download(uri: kSpain1, storeCallback: _storeResults);
+    await _download(uri: kFrance1, storeCallback: _storeResults);
+    await _download(uri: kFrance2, storeCallback: _storeResults);
+    await _download(uri: kNetherlands1, storeCallback: _storeResults);
+    await _download(uri: kBelgium1, storeCallback: _storeResults);
+    await _download(uri: kPortugal1, storeCallback: _storeResults);
+    await _download(uri: kTurkey1, storeCallback: _storeResults);
+    await _download(uri: kGreece1, storeCallback: _storeResults);
   }
 
-  Future<void> _download({String uri, Function storeCallback}) async {
-    var url = Uri.parse(uri);
-    http.Response response = await http.get(url);
+  Future<void> _download({
+    required String uri,
+    required Function(String responseBody) storeCallback,
+  }) async {
+    final url = Uri.parse(uri);
+    final response = await http.get(url);
 
-    if (response.statusCode == Constants.StatusOK) {
+    if (response.statusCode == kStatusOK) {
       storeCallback(response.body);
     } else {
-      print(response.statusCode);
+      debugPrint(response.statusCode.toString());
     }
   }
 
   void _storeFixtures(String responseBody) {
-    var lineSplitter = LineSplitter();
-    List<String> lines = lineSplitter.convert(responseBody);
+    const lineSplitter = LineSplitter();
+    final lines = lineSplitter.convert(responseBody);
 
-    String headerLine = lines[0];
-    List<String> headerValues = headerLine.split(',');
+    final headerLine = lines[0];
+    final headerValues = headerLine.split(',');
 
-    int dateIndex = _findColumnIndex(headerValues, Constants.DateColumnName);
-    int homeTeamIndex = _findColumnIndex(headerValues, Constants.HomeTeamColumnName);
-    int awayTeamIndex = _findColumnIndex(headerValues, Constants.AwayTeamColumnName);
-    int leagueIndex = _findColumnIndex(headerValues, Constants.LeagueName);
-    int overOddIndex = _findColumnIndex(headerValues, Constants.OverOddColumnName);
+    final dateIndex = _findColumnIndex(headerValues, kDateColumnName);
+    final homeTeamIndex = _findColumnIndex(headerValues, kHomeTeamColumnName);
+    final awayTeamIndex = _findColumnIndex(headerValues, kAwayTeamColumnName);
+    final leagueIndex = _findColumnIndex(headerValues, kLeagueName);
+    final overOddIndex = _findColumnIndex(headerValues, kOverOddColumnName);
 
-    int length = lines.length - 1;
-    for (int i = 1; i <= length; i++) {
-      List<String> values = lines[i].split(',');
+    for (var i = 1; i <= lines.length - 1; i++) {
+      final values = lines[i].split(',');
 
-      DateTime date = _createDate(values[dateIndex]);
-      double overOdd = values[overOddIndex] == '' ? 0.0 : double.parse(values[overOddIndex]);
+      final date = _createDate(values[dateIndex]);
+      final overOdd =
+          values[overOddIndex] == '' ? 0.0 : double.parse(values[overOddIndex]);
 
-      var fixture = Fixture(homeTeam: values[homeTeamIndex],
-                            awayTeam: values[awayTeamIndex],
-                            date: date,
-                            league: values[leagueIndex],
-                            overOdd: overOdd,
-                            finished: false);
+      final league = stringToLeagueEnum(values[leagueIndex]);
 
-      _fixtures.add(fixture);
+      final fixture = Fixture(
+        homeTeam: values[homeTeamIndex],
+        awayTeam: values[awayTeamIndex],
+        date: date,
+        league: league,
+        leagueName: leagueToLeagueName(league),
+        overOdd: overOdd,
+        overOddString: overOdd.toStringAsFixed(_fractionDigits),
+        finished: false,
+      );
+
+      fixtures.add(fixture);
     }
   }
 
   void _storeResults(String responseBody) {
-    var lineSplitter = LineSplitter();
-    List<String> lines = lineSplitter.convert(responseBody);
+    const lineSplitter = LineSplitter();
+    final lines = lineSplitter.convert(responseBody);
 
-    String headerLine = lines[0];
-    List<String> headerValues = headerLine.split(',');
+    final headerLine = lines[0];
+    final headerValues = headerLine.split(',');
 
-    int dateIndex = _findColumnIndex(headerValues, Constants.DateColumnName);
-    int homeTeamIndex = _findColumnIndex(headerValues, Constants.HomeTeamColumnName);
-    int awayTeamIndex = _findColumnIndex(headerValues, Constants.AwayTeamColumnName);
-    int homeScoreIndex = _findColumnIndex(headerValues, Constants.HomeScoreColumnName);
-    int awayScoreIndex = _findColumnIndex(headerValues, Constants.AwayScoreColumnName);
-    int leagueIndex = _findColumnIndex(headerValues, Constants.LeagueName);
-    int overOddIndex = _findColumnIndex(headerValues, Constants.OverOddColumnName);
+    final dateIndex = _findColumnIndex(headerValues, kDateColumnName);
+    final homeTeamIndex = _findColumnIndex(headerValues, kHomeTeamColumnName);
+    final awayTeamIndex = _findColumnIndex(headerValues, kAwayTeamColumnName);
+    final homeScoreIndex = _findColumnIndex(headerValues, kHomeScoreColumnName);
+    final awayScoreIndex = _findColumnIndex(headerValues, kAwayScoreColumnName);
+    final leagueIndex = _findColumnIndex(headerValues, kLeagueName);
+    final overOddIndex = _findColumnIndex(headerValues, kOverOddColumnName);
 
-    int length = lines.length - 1;
-    for (int i = 1; i <= length; i++) {
-      List<String> values = lines[i].split(',');
+    for (var i = 1; i <= lines.length - 1; i++) {
+      final values = lines[i].split(',');
 
-      DateTime date = _createDate(values[dateIndex]);
+      final date = _createDate(values[dateIndex]);
 
-      double overOdd = values[overOddIndex] == '' ? 0.0 : double.parse(values[overOddIndex]);
+      final overOdd =
+          values[overOddIndex] == '' ? 0.0 : double.parse(values[overOddIndex]);
 
-      var fixture = Fixture(homeTeam: values[homeTeamIndex],
-                            awayTeam: values[awayTeamIndex],
-                            homeScore: int.parse(values[homeScoreIndex]),
-                            awayScore: int.parse(values[awayScoreIndex]),
-                            date: date,
-                            league: values[leagueIndex],
-                            overOdd: overOdd,
-                            finished: true);
+      final league = stringToLeagueEnum(values[leagueIndex]);
 
-      if (_results.containsKey(fixture.league)) {
-        List<Fixture> fixtures = _results[fixture.league];
-        fixtures.add(fixture);
-        _results[fixture.league] = fixtures;
+      final fixture = Fixture(
+        homeTeam: values[homeTeamIndex],
+        awayTeam: values[awayTeamIndex],
+        homeScore: int.parse(values[homeScoreIndex]),
+        awayScore: int.parse(values[awayScoreIndex]),
+        date: date,
+        league: league,
+        leagueName: leagueToLeagueName(league),
+        overOdd: overOdd,
+        overOddString: overOdd.toStringAsFixed(_fractionDigits),
+        finished: true,
+      );
+
+      if (results.containsKey(fixture.league)) {
+        final fixturesCopy = results[fixture.league] as List<Fixture>
+          ..add(fixture);
+        results[fixture.league] = fixturesCopy;
       } else {
-        _results[fixture.league] = [fixture];
+        results[fixture.league] = [fixture];
       }
     }
   }
 
   int _findColumnIndex(List<String> values, String columnName) {
-    int length = values.length;
+    final length = values.length;
 
-    for (int i = 0; i < length; i++) {
+    for (var i = 0; i < length; i++) {
       if (values[i] == columnName) {
         return i;
       }
@@ -160,14 +169,16 @@ class Collector {
   }
 
   DateTime _createDate(String value) {
-    const int dayIndex = 0;
-    const int monthIndex = 1;
-    const int yearIndex = 2;
+    const dayIndex = 0;
+    const monthIndex = 1;
+    const yearIndex = 2;
 
-    List<String> values = value.split('/');
+    final values = value.split('/');
 
-    return DateTime(int.parse(values[yearIndex]), int.parse(values[monthIndex]), int.parse(values[dayIndex]));
+    return DateTime(
+      int.parse(values[yearIndex]),
+      int.parse(values[monthIndex]),
+      int.parse(values[dayIndex]),
+    );
   }
-
-  //#endregion
 }

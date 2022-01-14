@@ -1,73 +1,70 @@
+// Copyright 2022 Nikola Grujic. All rights reserved.
+// Use of this source code is governed by a GNU-style license that can be
+// found in the LICENSE file.
+
 import 'dart:core';
-import 'enums.dart';
-import 'package:overs_app/utils/utils.dart';
+import 'package:overs_app/data_collector/enums.dart';
 
+/// Class represents a single fixture between two teams
 class Fixture {
-  //#region Fields
+  /// Create new instance
+  Fixture({
+    required this.homeTeam,
+    required this.awayTeam,
+    this.homeScore,
+    this.awayScore,
+    required this.date,
+    required this.league,
+    required this.leagueName,
+    required this.overOdd,
+    required this.overOddString,
+    required this.finished,
+  });
 
-  String _homeTeam;
-  String _awayTeam;
-  int _homeScore;
-  int _awayScore;
-  DateTime _date;
-  double _overOdd;
-  String _overOddString;
-  bool _finished;
-  League _league;
-  String _leagueName;
+  /// Home team name
+  String homeTeam;
 
-  final int _fractionDigits = 2;
+  /// Away team name
+  String awayTeam;
 
-  //#endregion
+  /// Home team score
+  int? homeScore;
 
-  //#region Constructors
+  /// Away team score
+  int? awayScore;
 
-  Fixture({String homeTeam, String awayTeam, int homeScore, int awayScore, DateTime date, String league, double overOdd, bool finished}) {
-    _homeTeam = homeTeam;
-    _awayTeam = awayTeam;
-    _homeScore = homeScore;
-    _awayScore = awayScore;
-    _date = date;
-    _league = stringToLeagueEnum(league);
-    _leagueName = leagueToLeagueName(_league);
-    _overOdd = overOdd;
-    _overOddString = overOdd.toStringAsFixed(_fractionDigits);
-    _finished = finished;
-  }
+  /// Fixture date
+  DateTime date;
 
-  //#endregion
+  /// Over >2.5 goals odd
+  double overOdd;
 
-  //#region Getters
+  /// Over >2.5 goals odd (string)
+  String overOddString;
 
-  String get homeTeam => _homeTeam;
-  String get awayTeam => _awayTeam;
-  int get homeScore => _homeScore;
-  int get awayScore => _awayScore;
-  DateTime get date => _date;
-  double get overOdd => _overOdd;
-  String get overOddString => _overOddString;
-  bool get finished => _finished;
-  League get league => _league;
-  String get leagueName => _leagueName;
+  /// Indicator if fixture is already finished
+  bool finished;
 
-  //#endregion
+  /// League enum
+  League league;
 
-  //#region Methods
+  /// League name
+  String leagueName;
 
+  /// Returns string in format Home Team - Away Team
   String teamsString() {
-    return '$_homeTeam - $_awayTeam';
+    return '$homeTeam - $awayTeam';
   }
 
+  /// Returns fixture date
   String timeString() {
-    return '${_date.day}.${_date.month}.${_date.year}.';
+    return '${date.day}.${date.month}.${date.year}.';
   }
 
   @override
   String toString() {
-    return _finished
-        ? '$_league ${_date.toLocal()} $_homeTeam - $_awayTeam $_homeScore : $_awayScore Over odd: $_overOdd\n'
-        : '$_league ${_date.toLocal()} $_homeTeam - $_awayTeam Over odd: $_overOdd\n';
+    return finished
+        ? '$league ${date.toLocal()} $homeTeam - $awayTeam $homeScore : $awayScore Over odd: $overOdd\n'
+        : '$league ${date.toLocal()} $homeTeam - $awayTeam Over odd: $overOdd\n';
   }
-
-  //#endregion
 }
