@@ -24,9 +24,8 @@ class Candidate {
 
   /// Return history
   String historyString() {
-    final stringBuffer = StringBuffer();
-
-    stringBuffer.writeln('Home team recent results at home:');
+    final stringBuffer = StringBuffer()
+      ..writeln('Home team recent results at home:');
 
     for (final fixture in homeTeamPreviousFixtures) {
       stringBuffer.writeln(
@@ -35,9 +34,7 @@ class Candidate {
       );
     }
 
-    stringBuffer.writeln();
-
-    stringBuffer.writeln('Away team recent results as guest:');
+    stringBuffer.writeln('\nAway team recent results as guest:');
 
     for (final fixture in awayTeamPreviousFixtures) {
       stringBuffer.writeln(
@@ -46,18 +43,16 @@ class Candidate {
       );
     }
 
-    stringBuffer.writeln();
+    stringBuffer.writeln('\n');
 
     return stringBuffer.toString();
   }
 
   @override
   String toString() {
-    final stringBuffer = StringBuffer();
-
-    stringBuffer.writeln(candidateFixture.toString());
-
-    stringBuffer.writeln('Home team recent results:');
+    final stringBuffer = StringBuffer()
+      ..writeln(candidateFixture.toString())
+      ..writeln('Home team recent results:');
 
     for (final fixture in homeTeamPreviousFixtures) {
       stringBuffer.writeln(fixture.toString());
@@ -69,7 +64,7 @@ class Candidate {
       stringBuffer.writeln(fixture.toString());
     }
 
-    stringBuffer.writeln();
+    stringBuffer.writeln('\n');
 
     return stringBuffer.toString();
   }
