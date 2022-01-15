@@ -27,6 +27,14 @@ class Collector {
 
   final int _fractionDigits = 2;
 
+  int _dateIndex = -1;
+  int _homeTeamIndex = -1;
+  int _awayTeamIndex = -1;
+  int _homeScoreIndex = -1;
+  int _awayScoreIndex = -1;
+  int _leagueIndex = -1;
+  int _overOddIndex = -1;
+
   /// Download fixtures and results and store them in memory.
   ///
   /// Usage:
@@ -78,24 +86,29 @@ class Collector {
     final headerLine = lines[0];
     final headerValues = headerLine.split(',');
 
-    final dateIndex = _findColumnIndex(headerValues, kDateColumnName);
-    final homeTeamIndex = _findColumnIndex(headerValues, kHomeTeamColumnName);
-    final awayTeamIndex = _findColumnIndex(headerValues, kAwayTeamColumnName);
-    final leagueIndex = _findColumnIndex(headerValues, kLeagueName);
-    final overOddIndex = _findColumnIndex(headerValues, kOverOddColumnName);
+    _dateIndex = _findColumnIndex(headerValues, kDateColumnName);
+    _homeTeamIndex = _findColumnIndex(headerValues, kHomeTeamColumnName);
+    _awayTeamIndex = _findColumnIndex(headerValues, kAwayTeamColumnName);
+    _leagueIndex = _findColumnIndex(headerValues, kLeagueName);
+    _overOddIndex = _findColumnIndex(headerValues, kOverOddColumnName);
 
     for (var i = 1; i <= lines.length - 1; i++) {
       final values = lines[i].split(',');
 
-      final date = _createDate(values[dateIndex]);
-      final overOdd =
-          values[overOddIndex] == '' ? 0.0 : double.parse(values[overOddIndex]);
+      if (_isEmptyLine(values)) {
+        continue;
+      }
 
-      final league = stringToLeagueEnum(values[leagueIndex]);
+      final date = _createDate(values[_dateIndex]);
+      final overOdd = values[_overOddIndex] == ''
+          ? 0.0
+          : double.parse(values[_overOddIndex]);
+
+      final league = stringToLeagueEnum(values[_leagueIndex]);
 
       final fixture = Fixture(
-        homeTeam: values[homeTeamIndex],
-        awayTeam: values[awayTeamIndex],
+        homeTeam: values[_homeTeamIndex],
+        awayTeam: values[_awayTeamIndex],
         date: date,
         league: league,
         leagueName: leagueToLeagueName(league),
@@ -115,29 +128,34 @@ class Collector {
     final headerLine = lines[0];
     final headerValues = headerLine.split(',');
 
-    final dateIndex = _findColumnIndex(headerValues, kDateColumnName);
-    final homeTeamIndex = _findColumnIndex(headerValues, kHomeTeamColumnName);
-    final awayTeamIndex = _findColumnIndex(headerValues, kAwayTeamColumnName);
-    final homeScoreIndex = _findColumnIndex(headerValues, kHomeScoreColumnName);
-    final awayScoreIndex = _findColumnIndex(headerValues, kAwayScoreColumnName);
-    final leagueIndex = _findColumnIndex(headerValues, kLeagueName);
-    final overOddIndex = _findColumnIndex(headerValues, kOverOddColumnName);
+    _dateIndex = _findColumnIndex(headerValues, kDateColumnName);
+    _homeTeamIndex = _findColumnIndex(headerValues, kHomeTeamColumnName);
+    _awayTeamIndex = _findColumnIndex(headerValues, kAwayTeamColumnName);
+    _homeScoreIndex = _findColumnIndex(headerValues, kHomeScoreColumnName);
+    _awayScoreIndex = _findColumnIndex(headerValues, kAwayScoreColumnName);
+    _leagueIndex = _findColumnIndex(headerValues, kLeagueName);
+    _overOddIndex = _findColumnIndex(headerValues, kOverOddColumnName);
 
     for (var i = 1; i <= lines.length - 1; i++) {
       final values = lines[i].split(',');
 
-      final date = _createDate(values[dateIndex]);
+      if (_isEmptyLine(values)) {
+        continue;
+      }
 
-      final overOdd =
-          values[overOddIndex] == '' ? 0.0 : double.parse(values[overOddIndex]);
+      final date = _createDate(values[_dateIndex]);
 
-      final league = stringToLeagueEnum(values[leagueIndex]);
+      final overOdd = values[_overOddIndex] == ''
+          ? 0.0
+          : double.parse(values[_overOddIndex]);
+
+      final league = stringToLeagueEnum(values[_leagueIndex]);
 
       final fixture = Fixture(
-        homeTeam: values[homeTeamIndex],
-        awayTeam: values[awayTeamIndex],
-        homeScore: int.parse(values[homeScoreIndex]),
-        awayScore: int.parse(values[awayScoreIndex]),
+        homeTeam: values[_homeTeamIndex],
+        awayTeam: values[_awayTeamIndex],
+        homeScore: int.parse(values[_homeScoreIndex]),
+        awayScore: int.parse(values[_awayScoreIndex]),
         date: date,
         league: league,
         leagueName: leagueToLeagueName(league),
@@ -166,6 +184,21 @@ class Collector {
     }
 
     return -1;
+  }
+
+  bool _isEmptyLine(List<String> values) {
+    if (values.isEmpty) {
+      return true;
+    }
+
+    if (values[_dateIndex] == '' ||
+        values[_homeTeamIndex] == '' ||
+        values[_awayTeamIndex] == '' ||
+        values[_leagueIndex] == '') {
+      return true;
+    }
+
+    return false;
   }
 
   DateTime _createDate(String value) {

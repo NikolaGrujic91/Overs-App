@@ -5,6 +5,10 @@
 import 'dart:core';
 import 'package:overs_app/data_collector/enums.dart';
 
+/// TODO
+/// Use factory constructors to define result and upcoming fixture
+///
+
 /// Class represents a single fixture between two teams
 class Fixture {
   /// Create new instance
