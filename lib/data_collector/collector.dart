@@ -25,8 +25,6 @@ class Collector {
   LinkedHashMap<League, List<Fixture>> results =
       LinkedHashMap<League, List<Fixture>>();
 
-  final int _fractionDigits = 2;
-
   int _dateIndex = -1;
   int _homeTeamIndex = -1;
   int _awayTeamIndex = -1;
@@ -106,15 +104,12 @@ class Collector {
 
       final league = stringToLeagueEnum(values[_leagueIndex]);
 
-      final fixture = Fixture(
+      final fixture = Fixture.upcoming(
         homeTeam: values[_homeTeamIndex],
         awayTeam: values[_awayTeamIndex],
         date: date,
         league: league,
-        leagueName: leagueToLeagueName(league),
         overOdd: overOdd,
-        overOddString: overOdd.toStringAsFixed(_fractionDigits),
-        finished: false,
       );
 
       fixtures.add(fixture);
@@ -151,17 +146,14 @@ class Collector {
 
       final league = stringToLeagueEnum(values[_leagueIndex]);
 
-      final fixture = Fixture(
+      final fixture = Fixture.result(
         homeTeam: values[_homeTeamIndex],
         awayTeam: values[_awayTeamIndex],
         homeScore: int.parse(values[_homeScoreIndex]),
         awayScore: int.parse(values[_awayScoreIndex]),
         date: date,
         league: league,
-        leagueName: leagueToLeagueName(league),
         overOdd: overOdd,
-        overOddString: overOdd.toStringAsFixed(_fractionDigits),
-        finished: true,
       );
 
       if (results.containsKey(fixture.league)) {

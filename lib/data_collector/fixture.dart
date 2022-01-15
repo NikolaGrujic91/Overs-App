@@ -4,10 +4,7 @@
 
 import 'dart:core';
 import 'package:overs_app/data_collector/enums.dart';
-
-/// TODO
-/// Use factory constructors to define result and upcoming fixture
-///
+import 'package:overs_app/utils/utils.dart';
 
 /// Class represents a single fixture between two teams
 class Fixture {
@@ -24,6 +21,48 @@ class Fixture {
     required this.overOddString,
     required this.finished,
   });
+
+  /// Creates instance for upcoming fixture
+  factory Fixture.upcoming({
+    required String homeTeam,
+    required String awayTeam,
+    required DateTime date,
+    required League league,
+    required double overOdd,
+  }) =>
+      Fixture(
+        homeTeam: homeTeam,
+        awayTeam: awayTeam,
+        date: date,
+        league: league,
+        leagueName: leagueToLeagueName(league),
+        overOdd: overOdd,
+        overOddString: overOdd.toStringAsFixed(2),
+        finished: false,
+      );
+
+  /// Creates instance for a fixture that has already finished
+  factory Fixture.result({
+    required String homeTeam,
+    required String awayTeam,
+    required int homeScore,
+    required int awayScore,
+    required DateTime date,
+    required League league,
+    required double overOdd,
+  }) =>
+      Fixture(
+        homeTeam: homeTeam,
+        awayTeam: awayTeam,
+        homeScore: homeScore,
+        awayScore: awayScore,
+        date: date,
+        league: league,
+        leagueName: leagueToLeagueName(league),
+        overOdd: overOdd,
+        overOddString: overOdd.toStringAsFixed(2),
+        finished: true,
+      );
 
   /// Home team name
   String homeTeam;
@@ -68,7 +107,9 @@ class Fixture {
   @override
   String toString() {
     return finished
-        ? '$league ${date.toLocal()} $homeTeam - $awayTeam $homeScore : $awayScore Over odd: $overOdd\n'
-        : '$league ${date.toLocal()} $homeTeam - $awayTeam Over odd: $overOdd\n';
+        ? '$league ${date.toLocal()} $homeTeam - $awayTeam '
+            '$homeScore : $awayScore Over odd: $overOdd\n'
+        : '$league ${date.toLocal()} $homeTeam - $awayTeam '
+            'Over odd: $overOdd\n';
   }
 }
