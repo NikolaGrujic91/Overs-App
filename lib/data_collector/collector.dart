@@ -157,8 +157,7 @@ class Collector {
       );
 
       if (results.containsKey(fixture.league)) {
-        final fixturesCopy = results[fixture.league] as List<Fixture>
-          ..add(fixture);
+        final fixturesCopy = results[fixture.league]!..add(fixture);
         results[fixture.league] = fixturesCopy;
       } else {
         results[fixture.league] = [fixture];

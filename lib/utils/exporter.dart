@@ -14,32 +14,20 @@ Future<File> export(List<Candidate> candidates) async {
   final stringBuffer = StringBuffer();
 
   for (final candidate in candidates) {
-    stringBuffer.writeln(candidate.candidateFixture.teamsString());
     stringBuffer.writeln(
-      '${candidate.candidateFixture.leagueName}, '
-      '${candidate.candidateFixture.timeString()}',
-    );
-    stringBuffer.writeln(
-      'Over 2.5 goals odd: ${candidate.candidateFixture.overOddString}',
-    );
-    stringBuffer.writeln();
-    stringBuffer.writeln(
+      '${candidate.candidateFixture.teamsString()}\n'
+      '${candidate.candidateFixture.leagueName} '
+      '${candidate.candidateFixture.timeString()}\n'
+      'Over 2.5 goals odd: ${candidate.candidateFixture.overOddString}\n'
       '#bettingtips #bettingpicks #betting #sport #football '
-      '#bettingtwitter #FreePicks #sportpicks #bestbets',
-    );
-    stringBuffer.writeln(
+      '#bettingtwitter #FreePicks #sportpicks #bestbets\n'
       '#bettingodds #odds #soccertips #soccerpicks #soccerbetting '
-      '#tipster #footballbets',
-    );
-    stringBuffer.writeln(
+      '#tipster #footballbets\n'
       '${leagueToHashtag(candidate.candidateFixture.league)} '
-      '${candidateToHashtag(candidate)}',
-    );
-    stringBuffer.writeln(
+      '${candidateToHashtag(candidate)}\n'
       '------------------------------------------------------------------'
-      '-----------------------------',
+      '-----------------------------\n',
     );
-    stringBuffer.writeln();
   }
 
   return file.writeAsString(stringBuffer.toString());
