@@ -22,9 +22,12 @@ class CandidatesList extends StatelessWidget {
         controller: _scrollController,
         child: Consumer<OversDetector>(
           builder: (context, oversDetector, child) {
-            return ListView.builder(
+            return ListView.separated(
               controller: _scrollController,
               padding: const EdgeInsets.all(10),
+              separatorBuilder: (context, index) {
+                return const Divider();
+              },
               itemCount: oversDetector.candidates.isEmpty
                   ? 1
                   : oversDetector.candidates.length,

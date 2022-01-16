@@ -40,42 +40,38 @@ class CandidatesListTile extends StatelessWidget {
   }
 
   Widget _emptyTile() {
-    return const Card(
-      child: ListTile(
-        title: Text(
-          'Nothing found',
-          style: kTileTextStyle,
-        ),
-        tileColor: kBackgroundColorDarkGrey,
+    return const ListTile(
+      title: Text(
+        'Nothing found',
+        style: kTileTextStyle,
       ),
+      tileColor: kBackgroundColorDarkGrey,
     );
   }
 
   Widget _fixtureTile() {
-    return Card(
-      child: ListTile(
-        leading: Image.asset(
-          'icons/flags/png/${leagueToFlagName(candidate!.candidateFixture.league)}',
-          package: 'country_icons',
-          height: 40,
-          width: 40,
-        ),
-        title: Text(
-          candidate!.candidateFixture.teamsString(),
-          style: kTileTextStyle,
-        ),
-        subtitle: Text(
-          '${candidate!.candidateFixture.leagueName}, '
-          '${candidate!.candidateFixture.timeString()}\n\n'
-          '${candidate!.historyString()}',
-          style: kTileTextStyle,
-        ),
-        trailing: Text(
-          candidate!.candidateFixture.overOddString,
-          style: kTileTextStyle,
-        ),
-        tileColor: kBackgroundColorDarkGrey,
+    return ListTile(
+      leading: Image.asset(
+        'icons/flags/png/${leagueToFlagName(candidate!.candidateFixture.league)}',
+        package: 'country_icons',
+        height: 40,
+        width: 40,
       ),
+      title: Text(
+        candidate!.candidateFixture.teamsString(),
+        style: kTileTextStyle,
+      ),
+      subtitle: Text(
+        '${candidate!.candidateFixture.leagueName}, '
+        '${candidate!.candidateFixture.timeString()}\n\n'
+        '${candidate!.historyString()}',
+        style: kTileTextStyle,
+      ),
+      trailing: Text(
+        candidate!.candidateFixture.overOddString,
+        style: kTileTextStyle,
+      ),
+      tileColor: kBackgroundColorDarkGrey,
     );
   }
 }
