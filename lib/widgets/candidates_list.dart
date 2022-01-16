@@ -29,12 +29,11 @@ class CandidatesList extends StatelessWidget {
                   ? 1
                   : oversDetector.candidates.length,
               itemBuilder: (context, index) {
-                return CandidatesListTile(
-                  candidateFound: oversDetector.candidates.isNotEmpty,
-                  candidate: oversDetector.candidates.isNotEmpty
-                      ? oversDetector.candidates[index]
-                      : null,
-                );
+                return oversDetector.candidates.isEmpty
+                    ? CandidatesListTile.empty()
+                    : CandidatesListTile.fixture(
+                        candidate: oversDetector.candidates[index],
+                      );
               },
             );
           },
