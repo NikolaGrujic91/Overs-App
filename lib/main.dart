@@ -5,7 +5,6 @@
 import 'package:flutter/material.dart';
 import 'package:overs_app/overs_detector/overs_detector.dart';
 import 'package:overs_app/screens/main_screen.dart';
-import 'package:overs_app/utils/constants.dart';
 import 'package:provider/provider.dart';
 
 void main() {
