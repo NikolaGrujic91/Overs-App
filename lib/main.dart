@@ -24,9 +24,7 @@ class OversApp extends StatelessWidget {
       create: (context) => OversDetector(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark().copyWith(
-          highlightColor: kBackgroundColorDarkGrey,
-        ),
+        theme: ThemeData.dark(),
         home: const MainScreen(),
       ),
     );

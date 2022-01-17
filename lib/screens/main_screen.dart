@@ -19,18 +19,15 @@ class MainScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'Overs',
-          style: TextStyle(
-            color: kTextColorWhite,
-            fontWeight: FontWeight.bold,
-          ),
+          style: kTileTextStyle,
         ),
-        backgroundColor: kBackgroundColorMidnightBlue,
+        backgroundColor: kAppBarColor,
         actions: const <Widget>[
           RunIconButton(),
           ExportIconButton(),
         ],
       ),
-      backgroundColor: kBackgroundColorBlack,
+      backgroundColor: kBackgroundColor,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

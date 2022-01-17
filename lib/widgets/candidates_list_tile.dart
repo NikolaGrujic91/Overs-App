@@ -45,7 +45,7 @@ class CandidatesListTile extends StatelessWidget {
         'Nothing found',
         style: kTileTextStyle,
       ),
-      tileColor: kBackgroundColorDarkGrey,
+      tileColor: kBackgroundColor,
     );
   }
 
@@ -71,7 +71,7 @@ class CandidatesListTile extends StatelessWidget {
         candidate!.candidateFixture.overOddString,
         style: kTileTextStyle,
       ),
-      tileColor: kBackgroundColorDarkGrey,
+      tileColor: kBackgroundColor,
     );
   }
 }

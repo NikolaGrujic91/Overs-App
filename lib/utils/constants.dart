@@ -4,17 +4,14 @@
 
 import 'package:flutter/material.dart';
 
+/// AppBar Color
+const kAppBarColor = Color.fromARGB(255, 22, 95, 0);
+
+/// Background Color
+const kBackgroundColor = Color.fromARGB(255, 24, 24, 24);
+
 /// Text color white
-const kTextColorWhite = Color(0xfffffffd);
-
-/// Background Color Midnight Blue
-const kBackgroundColorMidnightBlue = Color(0xff162271);
-
-/// Background Color Black
-const kBackgroundColorBlack = Colors.black;
-
-/// Background Color Dark Grey
-const kBackgroundColorDarkGrey = Color(0xff303030);
+const kTextColorWhite = Color.fromARGB(255, 222, 222, 222);
 
 /// Tile Text Style
 const kTileTextStyle = TextStyle(color: kTextColorWhite);
