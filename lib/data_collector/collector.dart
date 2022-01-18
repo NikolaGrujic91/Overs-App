@@ -25,6 +25,8 @@ class Collector {
   LinkedHashMap<League, List<Fixture>> results =
       LinkedHashMap<League, List<Fixture>>();
 
+  final _lineSplitter = const LineSplitter();
+
   int _dateIndex = -1;
   int _homeTeamIndex = -1;
   int _awayTeamIndex = -1;
@@ -78,8 +80,7 @@ class Collector {
   }
 
   void _storeFixtures(String responseBody) {
-    const lineSplitter = LineSplitter();
-    final lines = lineSplitter.convert(responseBody);
+    final lines = _lineSplitter.convert(responseBody);
 
     final headerLine = lines[0];
     final headerValues = headerLine.split(',');
@@ -117,8 +118,7 @@ class Collector {
   }
 
   void _storeResults(String responseBody) {
-    const lineSplitter = LineSplitter();
-    final lines = lineSplitter.convert(responseBody);
+    final lines = _lineSplitter.convert(responseBody);
 
     final headerLine = lines[0];
     final headerValues = headerLine.split(',');
