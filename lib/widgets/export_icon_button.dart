@@ -25,7 +25,7 @@ class _ExportIconButtonState extends State<ExportIconButton> {
     return IconButton(
       icon: const Icon(Icons.import_export),
       color: kTextColorWhite,
-      disabledColor: Colors.black,
+      disabledColor: kDisabledColor,
       tooltip: 'Export candidates',
       onPressed: _pressed
           ? null

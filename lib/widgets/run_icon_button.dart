@@ -24,7 +24,7 @@ class _RunIconButtonState extends State<RunIconButton> {
     return IconButton(
       icon: const Icon(Icons.play_arrow),
       color: kTextColorWhite,
-      disabledColor: Colors.black,
+      disabledColor: kDisabledColor,
       tooltip: 'Find candidates',
       onPressed: _pressed
           ? null

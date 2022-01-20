@@ -10,6 +10,9 @@ const kAppBarColor = Color.fromARGB(255, 22, 95, 0);
 /// Background Color
 const kBackgroundColor = Color.fromARGB(255, 24, 24, 24);
 
+/// Disabled button Color
+const kDisabledColor = Color.fromARGB(255, 0, 0, 0);
+
 /// Text color white
 const kTextColorWhite = Color.fromARGB(255, 222, 222, 222);
 
