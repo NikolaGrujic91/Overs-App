@@ -3,10 +3,10 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:overs_app/overs_detector/candidate.dart';
-import 'package:overs_app/overs_detector/overs_detector.dart';
-import 'package:overs_app/utils/constants.dart';
-import 'package:overs_app/utils/utils.dart';
+import 'package:overs/overs_detector/candidate.dart';
+import 'package:overs/overs_detector/overs_detector.dart';
+import 'package:overs/utils/constants.dart';
+import 'package:overs/utils/utils.dart';
 import 'package:provider/provider.dart';
 
 /// Helper class that stores ExpansionPanel state information

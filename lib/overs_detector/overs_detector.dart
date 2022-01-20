@@ -5,11 +5,10 @@
 import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
-import 'package:overs_app/data_collector/collector.dart';
-import 'package:overs_app/data_collector/enums.dart';
-import 'package:overs_app/data_collector/fixture.dart';
-
-import 'package:overs_app/overs_detector/candidate.dart';
+import 'package:overs/data_collector/collector.dart';
+import 'package:overs/data_collector/enums.dart';
+import 'package:overs/data_collector/fixture.dart';
+import 'package:overs/overs_detector/candidate.dart';
 
 /// Class for detecting over 2.5 goals candidate fixtures
 class OversDetector extends ChangeNotifier {

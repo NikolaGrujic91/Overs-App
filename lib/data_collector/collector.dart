@@ -7,11 +7,11 @@ import 'dart:convert';
 import 'dart:core';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:overs_app/data_collector/constants.dart';
-import 'package:overs_app/data_collector/enums.dart';
-import 'package:overs_app/data_collector/fixture.dart';
-import 'package:overs_app/data_collector/links.dart';
-import 'package:overs_app/utils/utils.dart';
+import 'package:overs/data_collector/constants.dart';
+import 'package:overs/data_collector/enums.dart';
+import 'package:overs/data_collector/fixture.dart';
+import 'package:overs/data_collector/links.dart';
+import 'package:overs/utils/utils.dart';
 
 /// Class for collecting data
 class Collector {

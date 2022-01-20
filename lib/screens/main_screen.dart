@@ -3,10 +3,10 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:overs_app/utils/constants.dart';
-import 'package:overs_app/widgets/candidates_expansion_panel_list.dart';
-import 'package:overs_app/widgets/export_icon_button.dart';
-import 'package:overs_app/widgets/run_icon_button.dart';
+import 'package:overs/utils/constants.dart';
+import 'package:overs/widgets/candidates_expansion_panel_list.dart';
+import 'package:overs/widgets/export_icon_button.dart';
+import 'package:overs/widgets/run_icon_button.dart';
 
 /// Widget representing main screen
 class MainScreen extends StatelessWidget {

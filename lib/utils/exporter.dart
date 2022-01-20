@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 import 'dart:io';
-import 'package:overs_app/overs_detector/candidate.dart';
-import 'package:overs_app/utils/hashtags.dart';
+import 'package:overs/overs_detector/candidate.dart';
+import 'package:overs/utils/hashtags.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// Export candidates formatted fot Twitter posts

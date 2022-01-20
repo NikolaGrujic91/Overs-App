@@ -2,7 +2,7 @@
 // Use of this source code is governed by a GNU-style license that can be
 // found in the LICENSE file.
 
-import 'package:overs_app/data_collector/fixture.dart';
+import 'package:overs/data_collector/fixture.dart';
 
 /// Class represents a potential candidate fixture
 class Candidate {

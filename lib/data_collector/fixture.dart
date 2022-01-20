@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 import 'dart:core';
-import 'package:overs_app/data_collector/enums.dart';
-import 'package:overs_app/utils/utils.dart';
+import 'package:overs/data_collector/enums.dart';
+import 'package:overs/utils/utils.dart';
 
 /// Class represents a single fixture between two teams
 class Fixture {
