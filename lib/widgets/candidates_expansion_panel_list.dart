@@ -76,12 +76,7 @@ class _CandidatesListState extends State<CandidatesList> {
     }
 
     return ExpansionPanelList(
-      expansionCallback: (int index, bool isExpanded) {
-        setState(() {
-          _data[index].isExpanded = !isExpanded;
-          _isExpanding = true;
-        });
-      },
+      expansionCallback: _expansionCallback,
       children: _data.map<ExpansionPanel>((_Item item) {
         return ExpansionPanel(
           headerBuilder: (BuildContext context, bool isExpanded) {
@@ -107,6 +102,13 @@ class _CandidatesListState extends State<CandidatesList> {
         );
       }).toList(),
     );
+  }
+
+  void _expansionCallback(int index, bool isExpanded) {
+    setState(() {
+      _data[index].isExpanded = !isExpanded;
+      _isExpanding = true;
+    });
   }
 
   List<_Item> _generateItems(List<Candidate> candidates) {
