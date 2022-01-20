@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:overs_app/utils/constants.dart';
-import 'package:overs_app/widgets/candidates_list.dart';
+import 'package:overs_app/widgets/candidates_expansion_panel_list.dart';
 import 'package:overs_app/widgets/export_icon_button.dart';
 import 'package:overs_app/widgets/run_icon_button.dart';
 
@@ -28,12 +28,7 @@ class MainScreen extends StatelessWidget {
         ],
       ),
       backgroundColor: kBackgroundColor,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          CandidatesList(),
-        ],
-      ),
+      body: const CandidatesList(),
     );
   }
 }
