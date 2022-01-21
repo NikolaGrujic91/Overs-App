@@ -52,6 +52,7 @@ class CandidatesList extends StatefulWidget {
 class _CandidatesListState extends State<CandidatesList> {
   List<_Item> _data = [];
   bool _isExpanding = false;
+  final String _flagPath = 'icons/flags/png/';
   final String _iconsPackage = 'country_icons';
   final double _imageSize = 40;
 
@@ -118,8 +119,7 @@ class _CandidatesListState extends State<CandidatesList> {
       final candidateFixture = candidates[index].candidateFixture;
 
       return _Item(
-        headerLeading:
-            'icons/flags/png/${leagueToFlagName(candidateFixture.league)}',
+        headerLeading: '$_flagPath${leagueToFlagName(candidateFixture.league)}',
         headerTitle: candidateFixture.teamsString(),
         headerSubtitle: '${candidateFixture.leagueName}, '
             '${candidateFixture.timeString()}',

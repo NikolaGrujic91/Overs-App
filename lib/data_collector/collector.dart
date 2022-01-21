@@ -88,7 +88,7 @@ class Collector {
     _dateIndex = _findColumnIndex(headerValues, kDateColumnName);
     _homeTeamIndex = _findColumnIndex(headerValues, kHomeTeamColumnName);
     _awayTeamIndex = _findColumnIndex(headerValues, kAwayTeamColumnName);
-    _leagueIndex = _findColumnIndex(headerValues, kLeagueName);
+    _leagueIndex = _findColumnIndex(headerValues, kLeagueColumnName);
     _overOddIndex = _findColumnIndex(headerValues, kOverOddColumnName);
 
     for (var i = 1; i <= lines.length - 1; i++) {
@@ -128,7 +128,7 @@ class Collector {
     _awayTeamIndex = _findColumnIndex(headerValues, kAwayTeamColumnName);
     _homeScoreIndex = _findColumnIndex(headerValues, kHomeScoreColumnName);
     _awayScoreIndex = _findColumnIndex(headerValues, kAwayScoreColumnName);
-    _leagueIndex = _findColumnIndex(headerValues, kLeagueName);
+    _leagueIndex = _findColumnIndex(headerValues, kLeagueColumnName);
     _overOddIndex = _findColumnIndex(headerValues, kOverOddColumnName);
 
     for (var i = 1; i <= lines.length - 1; i++) {

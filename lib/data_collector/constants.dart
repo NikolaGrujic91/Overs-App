@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 /// League name column name
-const String kLeagueName = 'Div';
+const String kLeagueColumnName = 'Div';
 
 /// Date column name
 const String kDateColumnName = 'Date';
